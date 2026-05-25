@@ -21,7 +21,7 @@ interface Preferences {
 
 const SUPPORTED_EXT = new Set([".jpg", ".jpeg", ".png", ".webp", ".gif", ".bmp", ".tiff"]);
 
-const WALLPAPER_DIR = "/usr/share/backgrounds";
+const WALLPAPER_DIR = join(homedir(), "dotfiles", "backgrounds");
 const CACHE_DIR = join(homedir(), ".cache", "wallpaper-selector");
 const THUMB_W = 400;
 const THUMB_H = 225; // 16:9
@@ -136,7 +136,7 @@ export default function SelectWallpaper() {
 	};
 
 	const handleRandom = async () => {
-		const dir = getPreferenceValues<Preferences>().wallpaperDir || "/usr/share/backgrounds";
+		const dir = wallpaperDir || WALLPAPER_DIR;
 		const pool = readdirSync(dir)
 			.filter((f) => SUPPORTED_EXT.has(extname(f).toLowerCase()))
 			.map((f) => join(dir, f));
