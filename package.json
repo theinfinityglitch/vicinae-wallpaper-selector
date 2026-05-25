@@ -18,7 +18,15 @@
       "mode": "view"
     }
   ],
-  "preferences": [],
+  "preferences": [
+    {
+      "name": "wallpaperDir",
+      "title": "Wallpapers Directory",
+      "description": "The directory containing all the wallpaper files",
+      "required": false,
+      "type": "directory"
+    }
+  ],
   "scripts": {
     "build": "vici build",
     "dev": "vici develop",

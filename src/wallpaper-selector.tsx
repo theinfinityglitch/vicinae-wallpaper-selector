@@ -91,6 +91,7 @@ export default function SelectWallpaper() {
 	const { wallpaperDir } = getPreferenceValues<Preferences>();
 	const [items, setItems] = useState<WallpaperItem[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const dir = wallpaperDir || WALLPAPER_DIR;
 
 	useEffect(() => {
 		ensureCache();
@@ -98,8 +99,6 @@ export default function SelectWallpaper() {
 		// Run thumbnail generation off the main thread using a microtask chain
 		// so Vicinae can render the loading state immediately.
 		const load = async () => {
-			const dir = wallpaperDir || WALLPAPER_DIR;
-
 			const result: WallpaperItem[] = [];
 
 			let files: string[] = [];
@@ -136,7 +135,6 @@ export default function SelectWallpaper() {
 	};
 
 	const handleRandom = async () => {
-		const dir = wallpaperDir || WALLPAPER_DIR;
 		const pool = readdirSync(dir)
 			.filter((f) => SUPPORTED_EXT.has(extname(f).toLowerCase()))
 			.map((f) => join(dir, f));
